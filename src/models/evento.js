@@ -73,7 +73,7 @@ export default class Evento{
             horario: this.#horario,
             local: this.#local,
             preco: this.#preco,
-            ingressosDisponiveis: this.#ingressosDispo,
+            ingressosDispo: this.#ingressosDispo,
             descricao: this.#descricao
         }
     }
@@ -92,9 +92,9 @@ descricao: ${this.#descricao}`
         const eveDAO = new eventoDAO();
         await eveDAO.gravar(this);
     }
-    async alterar(altEvento) {
+    async alterar() {
         const eveDAO = new eventoDAO();
-        await eveDAO.alterar(altEvento);
+        await eveDAO.alterar(this);
     }
     async excluir() {
         const eveDAO = new eventoDAO();

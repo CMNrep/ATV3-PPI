@@ -1,8 +1,9 @@
+import e from 'express';
 import Evento from '../models/evento.js';
 
 export default class EventosCtrl {
     gravar(req, res) {
-        if(req.method == 'POST' && req.is("aplication/json")) {
+        if(req.method == 'POST' && req.is("application/json")) {
             const dados = req.body;
             const nome = dados.nome;
             const data = dados.data;
@@ -36,12 +37,12 @@ export default class EventosCtrl {
         else {
             res.status(405).json({
                 "status": false,
-                "message": "Metodo não permitido" + error.message
+                "message": "Metodo não permitido"
             })
         }
     }
     alterar(req, res) {
-        if((req.method == 'PUT' || req.method == 'PATCH') && req.is("/aplication/json")) {
+        if((req.method == 'PUT' || req.method == 'PATCH') && req.is("application/json")) {
             const dados = req.body;
             const nome = dados.nome;
             const data = dados.data;
@@ -52,7 +53,7 @@ export default class EventosCtrl {
             const descricao = dados.descricao;
             if(nome && data && horario && local && preco && ingressosDispo && descricao) {
                 const evento = new Evento(nome, data, horario, local, preco, ingressosDispo, descricao);
-                evento.alterar().then(() => {
+                evento.alterar(evento.nome).then(() => {
                     res.status(200).json({
                         "status": true,
                         "message": "Evento alterado com sucesso",
@@ -64,6 +65,12 @@ export default class EventosCtrl {
                     })
                 })
             }
+            else {
+                res.status(400).json({
+                    "status": false,
+                    "message": "Todos os campos devem ser informados"
+                })
+            }
         }
         else {
             res.status(405).json({
@@ -73,7 +80,7 @@ export default class EventosCtrl {
         }
     }   
     excluir(req, res) {
-        if(req.method == 'DELETE' && req.is("/aplication/json")) {
+        if(req.method == 'DELETE' && req.is("application/json")) {
             const dados = req.body;
             const nome = dados.nome;
             if(nome) {
