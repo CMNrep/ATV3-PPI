@@ -66,6 +66,18 @@ export default class Evento{
     }
 
     //methods
+    toJSON() {
+        return {
+            nome: this.#nome,
+            data: this.#data,
+            horario: this.#horario,
+            local: this.#local,
+            preco: this.#preco,
+            ingressosDisponiveis: this.#ingressosDispo,
+            descricao: this.#descricao
+        }
+    }
+
     toString() {
         return `${this.#nome} \n
 data: ${this.#data}
