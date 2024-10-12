@@ -10,7 +10,7 @@ export default async function dbconnect(){
             user: 'root',
             password: '', //senha confia
             port: 3306,
-            database: 'atv3ppi',
+            database: 'atv4ppi',
             waitForConnections: true,
             connectionLimit: 10,
             maxIdle: 10, // max idle connections, the default value is the same as `connectionLimit`
